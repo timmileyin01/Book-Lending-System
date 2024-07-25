@@ -1,0 +1,123 @@
+<?php
+include './admin/constants.php';
+include(base_app . "adminControllers/users.php");
+
+
+$setting = selectOne('settings', ['setting_id' => 1]);
+
+$websiteTitle = $setting['title'];
+$websiteAbout = $setting['about'];
+$websiteMax_upload = $setting['max_upload'];
+$websiteFine = $setting['fine'];
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title><?= $websiteTitle ?> Register</title>
+    <link rel="stylesheet" href="./css/lstyles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="./index.php" class="logo">
+                <img src="./admin/uploads/<?= $setting['logo'] ?>" alt="Library Logo">
+            </a>
+            <ul>
+                <li><a href="./index.php">Home</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="form-container register-container">
+            <form action="register.php" method="POST">
+                <h2>User Registeration</h2>
+                <?php include("./admin/adminHelpers/formErrors.php"); ?>
+                <?php include "./admin/adminIncludes/messages.php"; ?>
+                <div class="input-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" name="firstname" value="<?= $firstname ?>" placeholder="Firstname" required>
+                </div>
+                <div class="input-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="lastname" value="<?= $lastname ?>" placeholder="Lastname" required>
+                </div>
+                <div class="input-group">
+                    <label for="last_name">Matric or Staff ID:</label>
+                    <input type="text" name="id_number" value="<?= $id_number ?>" placeholder="Matric No." required>
+                </div>
+                <input type="hidden" name="user_role" value="student">
+                <div class="input-group">
+                    <label for="phone_num">Phone Number:</label>
+                    <input type="text" id="phone_num" value="<?= $phonenumber ?>" name="phonenumber" placeholder="Phone Number" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" value="<?= $email ?>" placeholder="Email Address" required>
+
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" value="<?= $password ?>" name="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirmpassword">Confirm Password:</label>
+                    <input type="password" id="confirmpassword" value="<?= $passwordConf ?>" name="passwordConf" placeholder="Confirm Password" required>
+                </div>
+                <div class="input-group">                    
+                    <button type="submit" name="register" class="btn">Register</button>
+                </div>
+                <div class="input-group my-3">
+                    <span class="text-muted">Already Registered?</span><a href="login.php">Login</a>
+                </div>
+                <div class="input-group">
+                    <span class="text-muted">Forgot Password?</span><a href="forgot-password.php">Reset</a>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="./index.php">Home</a></li>
+                    <li><a href="./register.php">Contact Us</a></li>
+                    <li><a href="./login.php">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>Email: support@library.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Library St, Booktown</p>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="./images/Facebook Icon Social Media PNG & SVG Design For T-Shirts.jpg" alt="Facebook"></a>
+                    <a href="#"><img src="./images/Premium PSD _ Social media icon twitter 3d.jpg" alt="Twitter"></a>
+                    <a href="#"><img src="./images/Instagram PNG - Free Download.jpg" alt="Instagram"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Library Book Lending System. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+    <script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+</body>
+
+</html>
